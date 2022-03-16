@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import com.springboot.demo.model.User;
 import com.springboot.demo.model.UserRole;
 import com.springboot.demo.service.UserService;
 
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -28,7 +29,7 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
   
-    @PostMapping("/") 
+    @PostMapping("/signup") 
     public User createUser(@RequestBody User user) throws Exception{
        
             user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
