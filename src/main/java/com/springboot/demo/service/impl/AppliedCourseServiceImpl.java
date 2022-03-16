@@ -23,7 +23,14 @@ public class AppliedCourseServiceImpl implements AppliedCourseService{
 	@Override
 	public AppliedCourse addAppliedCourse(AppliedCourse appliedCourse) {
 		// TODO Auto-generated method stub
+		EnrolledCourse enrolledCourse=new EnrolledCourse();
+		enrolledCourse.setJoinedDate(appliedCourse.getUpdatedAt());
+		enrolledCourse.setCourseStatus("started");
+		enrolledCourse.setCourse(appliedCourse.getCourse());
+		enrolledCourse.setStudent(appliedCourse.getStudent());
+		this.enrollCourseRepository.save(enrolledCourse);
 		return this.appliedCourseRepository.save(appliedCourse);
+		
 	}
 
 	@Override
@@ -32,15 +39,15 @@ public class AppliedCourseServiceImpl implements AppliedCourseService{
 		AppliedCourse c1=appliedCourseRepository.findById(appliedCourse.getApplicationId()).get();
 		appliedCourse.setCreatedAt(c1.getCreatedAt());
 		appliedCourse.setApplicationDate(c1.getApplicationDate());
-		if(appliedCourse.getApplicationStatus().equalsIgnoreCase("accepted"))
-		{
-			EnrolledCourse enrolledCourse=new EnrolledCourse();
-			enrolledCourse.setJoinedDate(appliedCourse.getUpdatedAt());
-			enrolledCourse.setCourseStatus("started");
-			enrolledCourse.setCourse(appliedCourse.getCourse());
-			enrolledCourse.setStudent(appliedCourse.getStudent());
-			this.enrollCourseRepository.save(enrolledCourse);
-		}
+//		if(appliedCourse.getApplicationStatus().equalsIgnoreCase("accepted"))
+//		{
+//			EnrolledCourse enrolledCourse=new EnrolledCourse();
+//			enrolledCourse.setJoinedDate(appliedCourse.getUpdatedAt());
+//			enrolledCourse.setCourseStatus("started");
+//			enrolledCourse.setCourse(appliedCourse.getCourse());
+//			enrolledCourse.setStudent(appliedCourse.getStudent());
+//			this.enrollCourseRepository.save(enrolledCourse);
+//		}
 		return this.appliedCourseRepository.save(appliedCourse);
 	}
 

@@ -7,4 +7,6 @@ import com.springboot.demo.model.EnrolledCourse;
 
 public interface EnrolledCourseRepository extends JpaRepository<EnrolledCourse,Long> {
 
+	public void save(AppliedCourse appliedCourse);
+
 }
