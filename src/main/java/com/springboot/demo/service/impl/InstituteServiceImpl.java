@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springboot.demo.exception.ResourceFoundException;
 import com.springboot.demo.exception.ResourceNotFoundException;
 import com.springboot.demo.model.Institute;
 import com.springboot.demo.model.Student;
@@ -22,6 +23,8 @@ public class InstituteServiceImpl implements InstituteService{
 	
 	@Override
 	public Institute addInstitute(Institute institute ) {
+		Institute local=this.instituteRepository.findByInstituteEmail(institute.getInstituteEmail());
+		if(local!=null) throw new ResourceFoundException("Institute Already Present !!");
 		return this.instituteRepository.save(institute);
 	}
 
@@ -29,6 +32,9 @@ public class InstituteServiceImpl implements InstituteService{
 	public Institute updateInstitute(Institute institute) {
 		// TODO Auto-generated method stub
 		instituteRepository.findById(institute.getInstituteId()).orElseThrow(()->new ResourceNotFoundException("institute not found with id"));
+		Institute local=this.instituteRepository.findByInstituteEmail(institute.getInstituteEmail());
+		if(local!=null) throw new ResourceFoundException("institute with given email already present");
+
 		Institute i1=instituteRepository.findById(institute.getInstituteId()).get();
 		institute.setCreatedAt(i1.getCreatedAt());
 		return this.instituteRepository.save(institute);
@@ -50,10 +56,8 @@ public class InstituteServiceImpl implements InstituteService{
 	@Override
 	public void deleteInstitute(Long instituteId) {
 		// TODO Auto-generated method stub
-		this.instituteRepository.findById(instituteId).orElseThrow(() -> new ResourceNotFoundException("institute not found"));
-		Institute institute=new Institute();
-		institute.setInstituteId(instituteId);
-		this.instituteRepository.delete(institute);
+		Institute local=this.instituteRepository.findById(instituteId).orElseThrow(() -> new ResourceNotFoundException("institute not found"));
+		this.instituteRepository.delete(local);
 	}
 
 

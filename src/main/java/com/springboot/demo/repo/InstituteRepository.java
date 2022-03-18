@@ -6,4 +6,6 @@ import com.springboot.demo.model.Institute;
 
 public interface InstituteRepository extends JpaRepository<Institute,Long> {
 
+	public Institute findByInstituteEmail(String instituteEmail);
+
 }

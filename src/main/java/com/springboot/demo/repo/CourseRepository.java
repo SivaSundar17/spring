@@ -10,6 +10,8 @@ import com.springboot.demo.model.Institute;
 public interface CourseRepository extends JpaRepository<Course,Long> {
 
 	Set<Course> findByInstitute(Institute institute);
+
+	public Course findByCourseName(String courseName);
 	
 	
 }
