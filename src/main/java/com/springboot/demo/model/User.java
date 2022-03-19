@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -66,9 +67,9 @@ public class User implements UserDetails{
 
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {
-            Set<Authority> set=new HashSet<>();
+            Set<SimpleGrantedAuthority> set=new HashSet<>();
             this.userRoles.forEach(userRole -> {
-                  set.add(new Authority(userRole.getRole().getRoleName()));
+                  set.add(new SimpleGrantedAuthority(userRole.getRole().getRoleName()));
             });
             return set;
       }
