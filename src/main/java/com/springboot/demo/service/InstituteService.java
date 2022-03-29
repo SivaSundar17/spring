@@ -14,4 +14,6 @@ public interface InstituteService {
 	public Institute getInstitute(Long instituteId);
 	
 	public void deleteInstitute(Long instituteId);
+
+	public Set<Institute> getByKeyword(String keyword);
 }

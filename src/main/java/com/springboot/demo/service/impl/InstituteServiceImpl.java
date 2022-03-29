@@ -2,7 +2,6 @@ package com.springboot.demo.service.impl;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.springboot.demo.exception.ResourceFoundException;
 import com.springboot.demo.exception.ResourceNotFoundException;
 import com.springboot.demo.model.Institute;
-import com.springboot.demo.model.Student;
 import com.springboot.demo.repo.InstituteRepository;
 import com.springboot.demo.service.InstituteService;
 
@@ -47,10 +45,10 @@ public class InstituteServiceImpl implements InstituteService{
 	}
 
 	@Override
-	public Institute getInstitute(Long academyId) {
+	public Institute getInstitute(Long instituteId) {
 		// TODO Auto-generated method stub
-		this.instituteRepository.findById(academyId).orElseThrow(() -> new ResourceNotFoundException("institute not found"));
-		return this.instituteRepository.findById(academyId).get();
+		this.instituteRepository.findById(instituteId).orElseThrow(() -> new ResourceNotFoundException("institute not found here "));
+		return this.instituteRepository.findById(instituteId).get();
 	}
 
 	@Override
@@ -59,6 +57,10 @@ public class InstituteServiceImpl implements InstituteService{
 		Institute local=this.instituteRepository.findById(instituteId).orElseThrow(() -> new ResourceNotFoundException("institute not found"));
 		this.instituteRepository.delete(local);
 	}
+	
+	public Set<Institute> getByKeyword(String keyword){
+		  return instituteRepository.findByKeyword(keyword);
+		 }
 
 
 }

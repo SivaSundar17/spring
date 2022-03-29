@@ -11,21 +11,21 @@ public class GlobalExceptionHandler {
 
 	// handling specific exception
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request){
+	public ResponseEntity<ErrorDetails> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request){
 		ErrorDetails errorDetails = 
 				new ErrorDetails(exception.getMessage(),false);
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(ResourceFoundException.class)
-	public ResponseEntity<?> resourceFoundHandling(ResourceFoundException exception, WebRequest request){
+	public ResponseEntity<ErrorDetails> resourceFoundHandling(ResourceFoundException exception, WebRequest request){
 		ErrorDetails errorDetails = 
 				new ErrorDetails(exception.getMessage(),false);
 		return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
 	}
 	
 	@ExceptionHandler(InvalidCredentialsException.class)
-	public ResponseEntity<?> invalidCredentialsHandling(InvalidCredentialsException exception, WebRequest request){
+	public ResponseEntity<ErrorDetails> invalidCredentialsHandling(InvalidCredentialsException exception, WebRequest request){
 		ErrorDetails errorDetails = 
 				new ErrorDetails(exception.getMessage(),false);
 		return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);

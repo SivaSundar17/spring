@@ -19,7 +19,7 @@ import com.springboot.demo.service.EnrolledCourseService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("")
+@RequestMapping("/user")
 public class EnrolledCourseController {
 	
 	@Autowired

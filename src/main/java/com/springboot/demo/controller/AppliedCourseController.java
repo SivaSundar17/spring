@@ -19,7 +19,7 @@ import com.springboot.demo.service.AppliedCourseService;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("")
+@RequestMapping("/user")
 public class AppliedCourseController {
 	
 	@Autowired

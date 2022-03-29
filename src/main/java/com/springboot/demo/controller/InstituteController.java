@@ -3,6 +3,7 @@ package com.springboot.demo.controller;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +13,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.springboot.demo.exception.ResourceNotFoundException;
 import com.springboot.demo.model.Institute;
 import com.springboot.demo.service.InstituteService;
-import java.util.Optional;
+
 
 
 @RestController
-@RequestMapping("/institute")
 @CrossOrigin("*")
+@RequestMapping("/institute")
+
 public class InstituteController {
 	
 	@Autowired
@@ -33,12 +34,12 @@ public class InstituteController {
 	 }
 	 
 	 @GetMapping("/{instituteId}")
-	 public Institute getinstitute(@PathVariable("instituteId")Long instituteId) {
+	 public Institute getInstitute(@PathVariable("instituteId")Long instituteId) {
 		 return this.instituteService.getInstitute(instituteId);
 	 }
 	 
 	 @GetMapping("/viewInstitute")
-	 public Set<Institute> getInstitute(){
+	 public Set<Institute> getInstitutes(){
 		 return this.instituteService.getInstitutes();
 	 }
 	 
@@ -51,4 +52,18 @@ public class InstituteController {
 	 public void deleteinstitute(@PathVariable("instituteId")Long instituteId) {
 		 this.instituteService.deleteInstitute(instituteId);
 	 }
+	 
+	 @GetMapping("/search/{keyword}")
+	 public Set<Institute> search(@PathVariable(value = "keyword", required = false)String keyword,Institute institute, Model model) {
+		  if(keyword.length()>0) {
+		   Set<Institute> list = instituteService.getByKeyword(keyword);
+		   return list;
+		  }
+		  else {
+		  Set<Institute> list = instituteService.getInstitutes();
+		  return list;
+		  }
+		  
+		  
+		 }
 }
