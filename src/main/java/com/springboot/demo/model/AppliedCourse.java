@@ -38,6 +38,10 @@ public class AppliedCourse {
     @JoinColumn(name = "courseId")
 	@ManyToOne(fetch = FetchType.EAGER)
     private Course course;
+    
+    @JoinColumn(name = "userId")
+	@ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
 	public long getApplicationId() {
 		return applicationId;
@@ -89,6 +93,14 @@ public class AppliedCourse {
 
 	public Course getCourse() {
 		return course;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setCourse(Course course) {

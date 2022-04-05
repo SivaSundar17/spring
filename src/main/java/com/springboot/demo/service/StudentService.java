@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.Query;
 
 import com.springboot.demo.model.Student;
+import com.springboot.demo.model.User;
 
 public interface StudentService {
 
@@ -21,6 +22,9 @@ public interface StudentService {
 
 
 	void deleteStudent(Long studentId);
+
+
+	public Set<Student> getStudentsofUser(User user);
 
 
 

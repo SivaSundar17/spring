@@ -28,6 +28,7 @@ public class AppliedCourseServiceImpl implements AppliedCourseService{
 		enrolledCourse.setCourseStatus("started");
 		enrolledCourse.setCourse(appliedCourse.getCourse());
 		enrolledCourse.setStudent(appliedCourse.getStudent());
+		enrolledCourse.setUser(appliedCourse.getUser());
 		this.enrollCourseRepository.save(enrolledCourse);
 		return this.appliedCourseRepository.save(appliedCourse);
 		

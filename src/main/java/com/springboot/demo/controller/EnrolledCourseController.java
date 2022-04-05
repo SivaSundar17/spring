@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.demo.model.EnrolledCourse;
+import com.springboot.demo.model.Institute;
+import com.springboot.demo.model.User;
 import com.springboot.demo.service.EnrolledCourseService;
 
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/user")
+@RequestMapping("/EnrolledCourse")
 public class EnrolledCourseController {
 	
 	@Autowired
@@ -48,5 +50,12 @@ public class EnrolledCourseController {
 	@DeleteMapping("/deleteEnrolledCourse/{enrolledId}")
 	public void deleteEnrolledCourse(@PathVariable("enrolledId")Long enrolledId) {
 		this.enrolledCourseService.deleteEnrolledCourse(enrolledId);
+	}
+	
+	@GetMapping("/enrolledCourses/{id}")
+	public Set<EnrolledCourse> getenrolledCoursesById(@PathVariable("id")Long id) {
+		User user=new User();
+		user.setId(id);
+		return this.enrolledCourseService.getEnrolledCourseByUserId(user);
 	}
 }

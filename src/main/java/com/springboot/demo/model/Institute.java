@@ -25,7 +25,6 @@ public class Institute {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long instituteId;
-	
 	private String instituteName;
 	private String instituteDesc;
 	private String state;

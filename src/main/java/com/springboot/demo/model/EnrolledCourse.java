@@ -26,6 +26,9 @@ public class EnrolledCourse {
 	private LocalDateTime joinedDate;
 	private Date courseEndDate;
 	private String courseStatus;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
 	@CreationTimestamp
     private LocalDateTime CreatedAt;
@@ -42,6 +45,14 @@ public class EnrolledCourse {
 
 	public long getEnrolledId() {
 		return enrolledId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setEnrolledId(long enrolledId) {

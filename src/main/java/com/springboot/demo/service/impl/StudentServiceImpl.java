@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.demo.exception.ResourceFoundException;
 import com.springboot.demo.exception.ResourceNotFoundException;
+import com.springboot.demo.model.EnrolledCourse;
 import com.springboot.demo.model.Student;
+import com.springboot.demo.model.User;
+import com.springboot.demo.repo.EnrolledCourseRepository;
 import com.springboot.demo.repo.StudentRepository;
 import com.springboot.demo.service.StudentService;
 
@@ -20,7 +23,8 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	private StudentRepository studentRepository;
-	
+	@Autowired 
+	EnrolledCourseRepository enrolledCourseRepository;
 	
 	@Override
 	public Student addStudent(Student student) {
@@ -56,6 +60,18 @@ public class StudentServiceImpl implements StudentService{
 //		Institute institute=new Institute();
 //		institute.setInstituteId(instituteId);
 //		this.instituteRepository.delete(institute);
+	}
+	
+	@Override
+	public Set<Student> getStudentsofUser(User user) {
+		// TODO Auto-generated method stub
+		
+		Set<Student> st=this.studentRepository.findByUser(user);
+		//Student student=new Student();
+		//student.setId(id);
+		//return enrolledCourseRepository.findByStudent(Student);
+		return st;
+		
 	}
 	
 	
